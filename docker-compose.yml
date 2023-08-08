@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  nodejs-server:
+    image: node:18
+    container_name: nodejs-server
+    working_dir:  /app
+    volumes:
+       - C:\Users\user\www\Radency\Task3\my-notes-app:/app
+    ports:
+      - '3000:3000' 
+    environment:
+      NODE_ENV: production 
+    command: npm start
+
+  postgres-db:
+    image: postgres:15
+      
+    container_name: postgres-db
+    ports: 
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: notes # Change this to your desired database name
+      POSTGRES_USER: postgres # Change this to your desired database user
+      POSTGRES_PASSWORD: postgres # Change this to your desired database password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
